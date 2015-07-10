@@ -3,7 +3,7 @@
 **How**
 
 ```
-run.py [-h] [--path PATH] [--name NAME]
+duplicate_lines_filter.py [-h] [--path PATH] [--name NAME]
 ```
 
 **arguments:**
