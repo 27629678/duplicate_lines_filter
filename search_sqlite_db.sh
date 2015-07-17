@@ -22,7 +22,13 @@ find_db_path ()
   if [ ${#array[@]} -gt 1 ]; then
 	  echo '#Warnning:more than one path to open, canceled by process!'
       echo 'quiting...'
-      return 0
+      return 1
+  fi
+
+  if [ ${#array[@]} -eq 0 ]; then
+    echo '#Warnning:no path to open, canceled by process!'
+      echo 'quiting...'
+      return 1
   fi
 
   target_path=$paths
