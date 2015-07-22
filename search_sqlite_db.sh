@@ -39,9 +39,10 @@ find_db_path ()
 # usage info
 show_help() {
 cat << EOF
-Usage: ${0##*/} [-c]<-t><-m> <-n sqlite_db_name>
+Usage: ${0##*/} [-c]<-d><-t><-m> <-n sqlite_db_name>
 Find and OPEN sqlite db in ~/Library/Developer/ Directory
 
+    -d          only open directory
     -c          default argument, find & open contacts.db
     -t          find & open todo.db
     -m          find & open imail.db
@@ -51,12 +52,16 @@ EOF
 
 main () {
   db_name='contacts'
-
-  while getopts ":vhctmn:" opt; do
+  is_open_file=true
+  # echo $is_open_file
+  while getopts ":vdhctmn:" opt; do
     case $opt in
       v)
         echo 'Version: 1.0.0'
         exit
+        ;;
+      d)
+        is_open_file=false
         ;;
       h)
         show_help
@@ -101,7 +106,13 @@ main () {
   fi
 
   echo 'openning ...'
-  open $target_path
+  echo "$is_open_file"
+  if [ $is_open_file == true ]; then
+    open $target_path
+  else
+    target_path=$(dirname $target_path)
+    open $target_path
+  fi
 }
 
 main "$@"
