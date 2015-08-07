@@ -7,7 +7,7 @@ find_db_path ()
 {
   echo
   local file=$@.db
-  local paths=$(find ~/Library/Developer/ -name $file)
+  local paths=$(find ~/Library/Developer/CoreSimulator/Devices/ -name $file)
   local array=(${paths// /})
   echo "Find "${#array[@]} "pahts for $file:"
 
